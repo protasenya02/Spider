@@ -1,45 +1,49 @@
 //
 //  Spider.hpp
-//  spider
+//  Class for spider
 //
 //  Created by Валентина Протасеня on 7.04.21.
 //
 
 #ifndef Spider_hpp
 #define Spider_hpp
-
-#include <Spider_firmware.h>
 #include "Foot.hpp"
+#include <Spider_firmware.h>
 
 class Spider {
     
 private:
+    static const int PINS_NUMBER = 3;
+    static const int FOOT_NUMBER = 6;
     
-    int pins_1[3] = {7,6,5};
-    int pins_2[3] = {9,3,4};
-    int pins_3[3] = {10,11,12};
-    int pins_4[3] = {3,4,5};
-    int pins_5[3] = {9,6,8};
-    int pins_6[3] = {11,12,10};
+    int pins_1[PINS_NUMBER] = {7,6,5};
+    int pins_2[PINS_NUMBER] = {9,3,4};
+    int pins_3[PINS_NUMBER] = {10,12,11};
     
-    Foot spiderFoot[6];
+    int pins_4[PINS_NUMBER] = {3,4,5};
+    int pins_5[PINS_NUMBER] = {9,6,8};
+    int pins_6[PINS_NUMBER] = {11,12,10};
+    
+    Foot spider_foot[FOOT_NUMBER];
     
 public:
     
-    Spider():
-    spiderFoot[0] {&servo_board_0, pins_1},
-    spiderFoot[1] {&servo_board_0, pins_2},
-    spiderFoot[2] {&servo_board_0, pins_3},
-    spiderFoot[3] {&servo_board_1, pins_4},
-    spiderFoot[4] {&servo_board_1, pins_5},
-    spiderFoot[5] {&servo_board_1, pins_6}
+    Spider(PCA9685Servo* servo_board_0,PCA9685Servo* servo_board_1):
+    spider_foot{ {servo_board_0, pins_1},
+                 {servo_board_0, pins_2},
+                 {servo_board_0, pins_3},
+                 {servo_board_1, pins_4},
+                 {servo_board_1, pins_5},
+                 {servo_board_1, pins_6}}
     {
     }
 
     void SetInitialPosition();
-    void GetUp();
+    void StandUp();
+    void ChangeFootByHands();
     
-}
+};
 
 
 #endif /* Spider_hpp */
+

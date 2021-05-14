@@ -1,12 +1,11 @@
 #include "Foot.hpp"
+#include <iostream>
 
 void Foot::ChangeFootPosition(int hip_angle, int knee_angle, int step_angle)
 {
-    
     hip.ChangeAngle(hip_angle);
     knee.ChangeAngle(knee_angle);
     step.ChangeAngle(step_angle);
-    
 }
 
 void Foot::ChangeHip(int angle)
@@ -23,7 +22,6 @@ void Foot::ChangeStep(int angle)
 {
     step.ChangeAngle(angle);
 }
-
 
 
 
