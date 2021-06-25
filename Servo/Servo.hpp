@@ -25,7 +25,8 @@ public:
     {
     }
     
-    void ChangeAngle(int angle);
+    void ChangeAngle(int angle, int delay_value = 32);
+    int GetAngle();
 };
 
 

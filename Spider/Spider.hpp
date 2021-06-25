@@ -40,8 +40,10 @@ public:
 
     void SetInitialPosition();
     void StandUp();
+    void Rise();
     void ChangeFootByHands();
-    
+    void BodyLift(int delay_value = 10, int lift_value = 30);
+    void StepForward();
 };
 
 

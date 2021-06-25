@@ -10,77 +10,101 @@
 
 void Spider::SetInitialPosition()
 {
-    spider_foot[0].ChangeFootPosition(65, 30, 60);
-    delay(100);
-    spider_foot[0].ChangeFootPosition(65, 60, 90);
+    spider_foot[0].ChangeFootPosition(65, 0, 80, 0);
+    spider_foot[1].ChangeFootPosition(93, 0, 80, 0);
+    spider_foot[2].ChangeFootPosition(85, 0, 80, 0);
     
-    spider_foot[1].ChangeFootPosition(93, 30, 60);
-    delay(100);
-    spider_foot[1].ChangeFootPosition(93, 60, 90);
-    
-    spider_foot[2].ChangeFootPosition(85, 30, 60);
-    delay(100);
-    spider_foot[2].ChangeFootPosition(85, 60, 90);
-    
-    
-    spider_foot[3].ChangeFootPosition(90, 180, 90);
-    delay(100);
-    spider_foot[3].ChangeFootPosition(90, 150, 60);
-    
-    spider_foot[4].ChangeFootPosition(95, 180, 90);
-    delay(100);
-    spider_foot[4].ChangeFootPosition(95, 150, 60);
+    spider_foot[3].ChangeFootPosition(90, 180, 100, 0);
+    spider_foot[4].ChangeFootPosition(95, 180, 100, 0);
+    spider_foot[5].ChangeFootPosition(90, 180, 100, 0);
+}
 
-    spider_foot[5].ChangeFootPosition(90, 180, 90);
+void Spider::Rise()
+{
     delay(100);
-    spider_foot[5].ChangeFootPosition(90, 150, 60);
+    
+    // leg 0
+    spider_foot[0].ChangeFootPosition(65, 0, 90, 20);
+    spider_foot[0].ChangeFootPosition(65, 45, 90, 20);
+
+    // leg 1
+    spider_foot[1].ChangeFootPosition(93, 0, 90, 20);
+    spider_foot[1].ChangeFootPosition(93, 51, 90, 20);
+    
+    // leg 2
+    spider_foot[2].ChangeFootPosition(85, 0, 90, 20);
+    spider_foot[2].ChangeFootPosition(85, 44, 90, 20);
+
+    // leg 3
+    spider_foot[3].ChangeFootPosition(90, 180, 60, 20);
+    spider_foot[3].ChangeFootPosition(90, 159, 60, 20);
+
+    // leg 4
+    spider_foot[4].ChangeFootPosition(95, 180, 60, 20);
+    spider_foot[4].ChangeFootPosition(95, 157, 60, 20);
+
+    // leg 5
+    spider_foot[5].ChangeFootPosition(90, 180, 60, 20);
+    spider_foot[5].ChangeFootPosition(90, 159, 60, 20);
+}
+
+void Spider::BodyLift(int delay_value, int lift_value)
+{
+    for(int i = 0; i < FOOT_NUMBER; i++)
+    {
+       // delay(delay_value);
+        if (i < 3) {
+        spider_foot[i].ChangeFootPosition(spider_foot[i].GetHipAngle(),
+                                          spider_foot[i].GetKneeAngle() + lift_value,
+                                          spider_foot[i].GetStepAngle());
+        } else {
+            spider_foot[i].ChangeFootPosition(spider_foot[i].GetHipAngle(),
+                                              spider_foot[i].GetKneeAngle() - lift_value,
+                                              spider_foot[i].GetStepAngle());
+        }
+    }
 }
 
 void Spider::StandUp()
 {
+
+    BodyLift();
     
-    // первые три ножки поднятие вверх
+    int delay_value = 200;
+    
+    // legs lifting up
     spider_foot[0].ChangeFootPosition(65, 30, 50);
     spider_foot[2].ChangeFootPosition(85, 30, 50);
     spider_foot[4].ChangeFootPosition(95, 180, 90);
-    
-    delay(1000);
-    
-    // первые три ножки становление
-    spider_foot[0].ChangeFootPosition(65, 40, 131);
+
+    delay(delay_value);
+
+    // stable position
+    spider_foot[0].ChangeFootPosition(65, 40, 128);
+    delay(100);
     spider_foot[2].ChangeFootPosition(85, 25, 128);
+    delay(100);
     spider_foot[4].ChangeFootPosition(95, 146, 45);
     
-    delay(500);
-    
-    // поднятие пузика
-    spider_foot[0].ChangeFootPosition(65, 50, 131);
-    spider_foot[1].ChangeFootPosition(93, 90, 90);
-    spider_foot[2].ChangeFootPosition(85, 50, 128);
-    
-    spider_foot[3].ChangeFootPosition(90, 140, 60);
-    spider_foot[4].ChangeFootPosition(95, 144, 45);
-    spider_foot[5].ChangeFootPosition(90, 140, 60);
-     
-    
-    delay(500);
-    
-    // вторые три ножки поднятие вверх
+    delay(delay_value);
+
+    // legs lifting up
     spider_foot[1].ChangeFootPosition(93, 30, 50);
     spider_foot[3].ChangeFootPosition(90, 180, 90);
     spider_foot[5].ChangeFootPosition(90, 180, 90);
-    
-    delay(1000);
-    
-    // вторые три ножки становление
+
+    delay(delay_value);
+
+    // stable position
     spider_foot[1].ChangeFootPosition(93, 35, 131);
+    delay(100);
     spider_foot[3].ChangeFootPosition(90, 146, 45);
+    delay(100);
     spider_foot[5].ChangeFootPosition(90, 146, 45);
 }
 
 void Spider::ChangeFootByHands()
 {
-  
     int foot_number = 0;
     std::cout<<"Foot number: ";
     std::cin>>foot_number;
@@ -99,3 +123,72 @@ void Spider::ChangeFootByHands()
     spider_foot[foot_number].ChangeStep(angle_arr[2]);
 }
 
+
+void Spider::StepForward()
+{
+    
+    int delay_value = 200;
+    int shift_value = 25;
+    
+    //-------------------------------------------------------------------------------
+    // first pair
+        
+    // legs lifting up
+    spider_foot[0].ChangeFootPosition(65, 30, 50, 10);
+    spider_foot[2].ChangeFootPosition(85, 30, 50, 10);
+    spider_foot[4].ChangeFootPosition(95, 180, 90, 10);
+    
+    delay(delay_value);
+    
+    // legs move forward
+    spider_foot[0].ChangeHip(spider_foot[0].GetHipAngle() - shift_value);
+    spider_foot[2].ChangeHip(spider_foot[2].GetHipAngle() - shift_value);
+    spider_foot[4].ChangeHip(spider_foot[4].GetHipAngle() + shift_value);
+    
+    delay(delay_value);
+
+    // legs move backward
+    spider_foot[1].ChangeHip(spider_foot[1].GetHipAngle() + shift_value);
+    spider_foot[3].ChangeHip(spider_foot[3].GetHipAngle() - shift_value);
+    spider_foot[5].ChangeHip(spider_foot[5].GetHipAngle() - shift_value);
+    
+    delay(delay_value);
+    
+    // stable position
+    spider_foot[0].ChangeFootPosition(spider_foot[0].GetHipAngle(), 40, 128);
+    spider_foot[2].ChangeFootPosition(spider_foot[2].GetHipAngle(), 25, 128);
+    spider_foot[4].ChangeFootPosition(spider_foot[4].GetHipAngle(), 146, 45);
+
+    delay(delay_value);
+    
+    //-------------------------------------------------------------------------------
+    // second pair
+    
+    // legs lifting up
+    spider_foot[1].ChangeFootPosition(110, 30, 50);
+    spider_foot[3].ChangeFootPosition(60, 180, 90);
+    spider_foot[5].ChangeFootPosition(60, 180, 90);
+
+    delay(delay_value);
+    
+    // legs move forward
+    spider_foot[1].ChangeHip(spider_foot[1].GetHipAngle() - shift_value);           // 93
+    spider_foot[3].ChangeHip(spider_foot[3].GetHipAngle() + shift_value);           // 90
+    spider_foot[5].ChangeHip(spider_foot[5].GetHipAngle() + shift_value);           // 90
+    
+    delay(delay_value);
+    
+    // legs move backward
+    spider_foot[0].ChangeHip(spider_foot[0].GetHipAngle() + shift_value);           // 65
+    spider_foot[2].ChangeHip(spider_foot[2].GetHipAngle() + shift_value);           // 85
+    spider_foot[4].ChangeHip(spider_foot[4].GetHipAngle() - shift_value);           // 95
+
+    delay(delay_value);
+
+    // stable position
+    spider_foot[1].ChangeFootPosition(spider_foot[1].GetHipAngle(), 35, 131);
+    spider_foot[3].ChangeFootPosition(spider_foot[3].GetHipAngle(), 146, 45);
+    spider_foot[5].ChangeFootPosition(spider_foot[5].GetHipAngle(), 146, 45);
+
+    delay(delay_value);
+}

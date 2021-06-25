@@ -26,10 +26,15 @@ public:
     {
     }
     
-    void ChangeFootPosition(int hip_angle, int knee_angle, int step_angle);
-    void ChangeHip(int angle);
-    void ChangeKnee(int angle);
-    void ChangeStep(int angle);
+    void ChangeFootPosition(int hip_angle, int knee_angle, int step_angle, int delay_value = 32);
+    void ChangeHip(int angle, int delay_value = 5);
+    void ChangeKnee(int angle, int delay_value = 5);
+    void ChangeStep(int angle, int delay_value = 5);
+    int GetHipAngle();
+    int GetKneeAngle();
+    int GetStepAngle();
+
+    
 };
 
 #endif /* Foot_hpp */

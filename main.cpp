@@ -45,9 +45,11 @@ void SpiderMenu(Spider *spider) {
     while(!is_exit) {
         
         std::cout<<"1. Initial position\n";
-        std::cout<<"2. Stand up\n";
-        std::cout<<"3. Change foot by hands\n";
-        std::cout<<"5. Exit\n\n";
+        std::cout<<"2. Rise\n";
+        std::cout<<"3. Stand up\n";
+        std::cout<<"4. Change foot by hands\n";
+        std::cout<<"5. Step forward\n";
+        std::cout<<"6. Exit\n\n";
         
         std::cin>>answer;
 
@@ -57,17 +59,22 @@ void SpiderMenu(Spider *spider) {
                 break;
                 
             case 2:
-                spider->StandUp();
+                spider->Rise();
                 break;
         
             case 3:
-                spider->ChangeFootByHands();
+                spider->StandUp();
                 break;
                 
             case 4:
+                spider->ChangeFootByHands();
                 break;
                 
             case 5:
+                spider->StepForward();
+                break;
+                
+            case 6:
                 is_exit = true;
                 break;
         }

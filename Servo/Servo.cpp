@@ -7,7 +7,7 @@
 
 #include "Servo.hpp"
 
-void Servo::ChangeAngle(int angle)
+void Servo::ChangeAngle(int angle, int delay_value)
 {
     if (angle_ != 0) {
         
@@ -20,10 +20,15 @@ void Servo::ChangeAngle(int angle)
 
         for(int i = 1; i <= interval_counter; i++){
             servoboard_->SetAngle(CHANNEL(pin_), ANGLE(angle_ + sign * MIN_ANGLE * i));
-            delay(32);
+            delay(delay_value);
         }
     }
     
     servoboard_->SetAngle(CHANNEL(pin_), ANGLE(angle));
     angle_ = angle;
+}
+
+int Servo::GetAngle()
+{
+    return angle_;
 }
